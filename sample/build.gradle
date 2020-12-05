@@ -33,4 +33,5 @@ dependencies {
     implementation deps.android.constraint
     implementation deps.android.support_v4
     implementation deps.android.appcompat_v7
+    implementation project(path: ':banner')
 }
