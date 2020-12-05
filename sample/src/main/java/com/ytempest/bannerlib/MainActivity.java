@@ -1,4 +1,4 @@
-package com.ytempest.banner;
+package com.ytempest.bannerlib;
 
 
 import android.os.Bundle;

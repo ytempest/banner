@@ -4,7 +4,7 @@ android {
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        applicationId "com.ytempest.banner"
+        applicationId "com.ytempest.bannerlib"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
 
