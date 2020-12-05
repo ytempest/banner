@@ -18,11 +18,14 @@ import com.ytempest.banner.transformers.Transformers;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-
 /**
  * @author ytempest
  * @since 2020/11/23
+ * This is an extendable banner, you can defined yourself banner page view and banner title view and
+ * bind data or update data for them
+ * <p>
+ * Banner will be auto play pager, it need you to control it's state by
+ * {@link Banner#startAutoPlay()} and {@link Banner#stopAutoPlay()}
  */
 public class Banner extends FrameLayout {
 
@@ -81,7 +84,7 @@ public class Banner extends FrameLayout {
         } catch (Exception e) {
             Log.e(TAG, "fail to set scroller for banner, error msg : " + e.getMessage());
         }
-        mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (mOnPageChangeListener != null) {
@@ -116,6 +119,11 @@ public class Banner extends FrameLayout {
         });
     }
 
+    /**
+     * show banner data, the type of data need as same as  {@link AbsBannerBinder} that you set
+     *
+     * @throws NullPointerException if you not set binder by {@link Banner#setBannerBinder(AbsBannerBinder)}
+     */
     public void display(List data) {
         if (data == null || data.isEmpty()) return;
         if (mBinder == null) throw new NullPointerException("Please set banner binder firstly");
@@ -146,6 +154,9 @@ public class Banner extends FrameLayout {
         postDelayed(mPlayTask, mPlayDuration + mScroller.getScrollDuration());
     }
 
+    /**
+     * you need to call the method when the page visible, such as Activity#onResume()
+     */
     public void startAutoPlay() {
         if (!isPlaying && isAutoPlayable()) {
             isPlaying = true;
@@ -153,6 +164,9 @@ public class Banner extends FrameLayout {
         }
     }
 
+    /**
+     * you need to call the method when the page invisible, such as Activity#onPause()
+     */
     public void stopAutoPlay() {
         if (isPlaying) {
             isPlaying = false;
@@ -256,9 +270,9 @@ public class Banner extends FrameLayout {
 
     /*Listener*/
 
-    private OnPageChangeListener mOnPageChangeListener;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
 
-    public void setOnPageChangeListener(OnPageChangeListener listener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener listener) {
         mOnPageChangeListener = listener;
     }
 
