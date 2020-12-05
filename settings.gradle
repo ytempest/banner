@@ -1,2 +1,3 @@
 rootProject.name='banner-parent'
 include ':sample'
+include ':banner'
