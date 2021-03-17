@@ -22,10 +22,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mBanner = findViewById(R.id.view_main_banner);
         mBanner.setBannerBinder(new BannerBinder());
+        // 设置banner展示时间
         mBanner.setPlayDuration(2000);
+        // 设置banner切换动画时间
         mBanner.setScrollDuration(1000);
+        // 设置标题栏在banner的位置
         mBanner.setBannerTitleGravity(Gravity.BOTTOM);
-        mBanner.setScrollAnimation(Transformers.DAMPING);
+        // 设置切换动画
+        mBanner.setScrollAnimation(Transformers.FLIP);
 
         mBanner.postDelayed(new Runnable() {
             @Override
